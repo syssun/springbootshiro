@@ -51,20 +51,15 @@ public class LoginController {
 
         return "index";
     }
-    // 注解验证 角色和权限
-    @RequiresRoles("admin")
-    @RequiresPermissions("user:update")
-    @RequestMapping("/home")
-    public String home() {
 
-        return "index";
-    }
     //登出
     @RequestMapping("/logout")
     public String logOut() {
         Subject subject = SecurityUtils.getSubject();
-        subject.checkRole("admin");
-        subject.logout();
+        if(subject !=null) {
+            //subject.checkRole("admin");
+            subject.logout();
+        }
         return "logout";
     }
 
